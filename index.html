@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cyber Monday en MISAKROOS</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#0b0f19;--card:#121827;--line:#232c44;--violet:#8b5cf6;--cyan:#22d3ee;--txt:#e8ecf6;--mut:#8f9ab5}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,sans-serif;margin:0;padding-bottom:84px}
+h1,h2,h3,.disp{font-family:'Space Grotesk',Inter,system-ui,sans-serif}
+.glow{background:radial-gradient(60% 50% at 20% 0%,rgba(139,92,246,.28),transparent),radial-gradient(50% 40% at 90% 10%,rgba(34,211,238,.18),transparent)}
+.card{background:var(--card);border:1px solid var(--line);transition:border-color .2s,box-shadow .2s}
+.card.sel{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan),0 0 28px rgba(34,211,238,.18)}
+.grad{background:linear-gradient(90deg,var(--violet),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{background:linear-gradient(90deg,var(--violet),var(--cyan));color:#06101c;font-weight:700}
+.tab.on{background:linear-gradient(90deg,var(--violet),var(--cyan));color:#06101c}
+.lg-svg{display:block;aspect-ratio:132/36;width:auto;border-radius:8px;box-shadow:0 0 0 1px rgba(255,255,255,.1)}
+.lg-s{height:26px}.lg-m{height:32px}.lg-l{height:38px}
+@media(min-width:640px){.lg-l{height:44px}}
+button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- SPRITE de logos SVG (reemplazá cada <symbol> por el logo oficial si lo tenés) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="l-netflix" viewBox="0 0 132 36">
+    <rect width="132" height="36" rx="8" fill="#000"/>
+    <rect x="10" y="6" width="4.5" height="24" fill="#b20710"/>
+    <rect x="21.5" y="6" width="4.5" height="24" fill="#b20710"/>
+    <polygon points="10,6 14.5,6 26,30 21.5,30" fill="#e50914"/>
+    <text x="34" y="24" font-family="Arial Black,Arial,sans-serif" font-size="17" font-weight="900" fill="#e50914" textLength="88" lengthAdjust="spacingAndGlyphs">NETFLIX</text>
+  </symbol>
+  <symbol id="l-disney" viewBox="0 0 132 36">
+    <rect width="132" height="36" rx="8" fill="#0b1b57"/>
+    <path d="M22 11 Q66 -1 110 11" stroke="#5fb4ff" stroke-width="2" fill="none"/>
+    <text x="66" y="26" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="21" font-style="italic" font-weight="700" fill="#fff">Disney+</text>
+  </symbol>
+  <symbol id="l-prime" viewBox="0 0 132 36">
+    <rect width="132" height="36" rx="8" fill="#0f171e"/>
+    <text x="66" y="20" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700"><tspan fill="#00a8e1">prime</tspan><tspan fill="#fff"> video</tspan></text>
+    <path d="M30 26 Q64 34 96 25" stroke="#00a8e1" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M91 21.5 L97 25 L90.5 29" stroke="#00a8e1" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="l-paramount" viewBox="0 0 132 36">
+    <rect width="132" height="36" rx="8" fill="#0064ff"/>
+    <polygon points="9,29 20,11 26,20 31,14 43,29" fill="#fff"/>
+    <circle cx="14" cy="9" r="1.4" fill="#fff"/><circle cx="20" cy="6" r="1.4" fill="#fff"/><circle cx="27" cy="6.5" r="1.4" fill="#fff"/><circle cx="33" cy="9" r="1.4" fill="#fff"/>
+    <text x="48" y="23" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#fff" textLength="76" lengthAdjust="spacingAndGlyphs">Paramount+</text>
+  </symbol>
+  <symbol id="l-hbo" viewBox="0 0 132 36">
+    <rect width="132" height="36" rx="8" fill="#000"/>
+    <text x="16" y="26" font-family="Arial Black,Arial,sans-serif" font-size="22" font-weight="900" fill="#fff" textLength="52" lengthAdjust="spacingAndGlyphs">HBO</text>
+    <text x="74" y="26" font-family="Arial Black,Arial,sans-serif" font-size="22" font-weight="900" fill="#a855f7" textLength="44" lengthAdjust="spacingAndGlyphs">max</text>
+  </symbol>
+  <symbol id="l-universal" viewBox="0 0 132 36">
+    <rect width="132" height="36" rx="8" fill="#0a0f1e"/>
+    <text x="12" y="23" font-family="Arial,sans-serif" font-size="15" font-weight="800" fill="#fff" textLength="94" lengthAdjust="spacingAndGlyphs">UNIVERSAL</text>
+    <text x="110" y="24" font-family="Arial,sans-serif" font-size="20" font-weight="800" fill="#f5c518">+</text>
+    <rect x="12" y="28" width="94" height="2" fill="#f5c518"/>
+  </symbol>
+</svg>
+
+<header class="glow">
+  <div class="max-w-6xl mx-auto px-4 pt-5 flex items-center justify-between">
+    <span class="disp font-bold text-xl tracking-wide">MISAK<span class="grad">ROOS</span></span>
+    <a href="#ofertas" class="text-sm text-[var(--mut)] hover:text-white">Ver ofertas</a>
+  </div>
+  <div class="max-w-6xl mx-auto px-4 pt-12 pb-12 text-center">
+    <h1 class="text-4xl sm:text-6xl font-bold leading-tight">Cyber Monday en <span class="grad">MISAKROOS</span></h1>
+    <p class="mt-4 max-w-xl mx-auto text-[var(--mut)] text-base sm:text-lg">Tu streaming favorito con hasta 30% de ahorro. Recibís tu acceso al instante y tenés garantía de activación.</p>
+
+    <div class="mt-8 flex flex-wrap justify-center gap-2 text-sm">
+      <span class="card rounded-full px-4 py-2">⚡ Entrega inmediata</span>
+      <span class="card rounded-full px-4 py-2">🛡️ Garantía de activación</span>
+      <span class="card rounded-full px-4 py-2">✅ Cuentas originales</span>
+    </div>
+
+    <p class="mt-10 text-sm text-[var(--mut)]">Plataformas disponibles</p>
+    <div id="logo-strip" class="mt-3 flex flex-wrap justify-center gap-3"></div>
+  </div>
+</header>
+
+<main id="ofertas" class="max-w-6xl mx-auto px-4 pb-10">
+  <div class="flex justify-center mb-8">
+    <div class="card rounded-full p-1 flex gap-1" role="tablist">
+      <button class="tab on rounded-full px-5 py-2.5 text-sm font-semibold" data-tab="combos" role="tab">Combos Cyber</button>
+      <button class="tab rounded-full px-5 py-2.5 text-sm font-semibold text-[var(--mut)]" data-tab="singles" role="tab">Cuentas individuales</button>
+    </div>
+  </div>
+
+  <div class="grid lg:grid-cols-[1fr_360px] gap-8 items-start">
+    <section>
+      <div id="p-combos" class="grid sm:grid-cols-2 gap-4"></div>
+      <div id="p-singles" class="hidden">
+        <p class="text-sm text-[var(--mut)] mb-4">Elegí las que quieras: 1 cuenta 10% OFF, 2 cuentas 20% OFF, 3 o más 30% OFF. El descuento se aplica solo.</p>
+        <div id="singles-grid" class="grid sm:grid-cols-2 gap-4"></div>
+      </div>
+    </section>
+
+    <aside id="resumen" class="lg:sticky lg:top-4">
+      <div class="card rounded-2xl p-5">
+        <h2 class="text-xl font-bold mb-3">Resumen de tu pedido</h2>
+        <div id="upsell" class="hidden mb-4 rounded-xl p-3 text-sm border border-[var(--violet)] bg-[rgba(139,92,246,.12)]"></div>
+        <ul id="lines" class="space-y-2 text-sm mb-4"></ul>
+        <div class="border-t border-[var(--line)] pt-3 space-y-1.5 text-sm">
+          <div class="flex justify-between text-[var(--mut)]"><span>Subtotal regular</span><span id="t-reg" class="line-through">$0</span></div>
+          <div id="t-extra-row" class="hidden flex justify-between text-[var(--cyan)]"><span>Extra multicombo 5%</span><span id="t-extra"></span></div>
+          <div class="flex justify-between font-semibold text-emerald-400"><span>Ahorrás</span><span id="t-save">$0</span></div>
+          <div class="flex justify-between items-end pt-2"><span class="text-[var(--mut)]">Total a pagar</span><span id="t-total" class="disp text-3xl font-bold">$0</span></div>
+        </div>
+        <button id="wa" class="btn w-full mt-5 rounded-xl py-3.5 text-base disabled:opacity-40 disabled:cursor-not-allowed" disabled>Completar pedido por WhatsApp</button>
+        <p class="text-xs text-[var(--mut)] mt-3 text-center">Te respondemos al instante con los medios de pago.</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="text-center text-xs text-[var(--mut)] pb-6 px-4">© MISAKROOS. Precios en pesos argentinos (ARS). Las marcas pertenecen a sus respectivos dueños.</footer>
+
+<div class="lg:hidden fixed bottom-0 inset-x-0 z-20 bg-[#0b0f19]/95 backdrop-blur border-t border-[var(--line)] px-4 pt-3" style="padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))">
+  <div class="flex items-center gap-3">
+    <div class="flex-1">
+      <div class="text-xs text-[var(--mut)]" id="bar-count">Sin productos</div>
+      <div class="disp font-bold text-xl" id="bar-total">$0</div>
+    </div>
+    <a href="#resumen" class="btn rounded-xl px-5 py-3 text-sm">Ver pedido</a>
+  </div>
+</div>
+
+<script>
+const WA = '5492645182955';
+const fmt = n => '$' + Math.round(n).toLocaleString('es-AR');
+
+const SYMBOL = {'Netflix':'l-netflix','Disney+':'l-disney','Prime Video':'l-prime','Paramount+':'l-paramount','HBO Max':'l-hbo','Universal+':'l-universal'};
+const logo = (name, size='m') => `<svg class="lg-svg lg-${size}" viewBox="0 0 132 36" role="img" aria-label="${name}"><use href="#${SYMBOL[name]}"/></svg>`;
+
+const combos = [
+  {id:'duo-cine', name:'Dúo Cine & Series', items:['Prime Video','HBO Max'], reg:10000, price:7500},
+  {id:'duo-premium', name:'Dúo Premium', items:['Netflix','Disney+'], reg:16000, price:12800},
+  {id:'trio', name:'Trío Maratón', items:['Prime Video','Paramount+','HBO Max'], reg:15000, price:10500},
+  {id:'pase', name:'Pase Total Streaming (6 plataformas)', items:['Netflix','Disney+','Prime Video','Paramount+','HBO Max','Universal+'], reg:36000, price:25200, star:true}
+];
+const singles = [
+  {id:'netflix', name:'Netflix', price:8500},
+  {id:'disney', name:'Disney+', price:7500},
+  {id:'prime', name:'Prime Video', price:5000},
+  {id:'paramount', name:'Paramount+', price:5000},
+  {id:'hbo', name:'HBO Max', price:5000},
+  {id:'universal', name:'Universal+', price:5000}
+];
+let selC = new Set(), selS = new Set();
+const pctFor = n => n === 0 ? 0 : n === 1 ? .10 : n === 2 ? .20 : .30;
+
+document.getElementById('logo-strip').innerHTML = Object.keys(SYMBOL).map(n => logo(n, 'l')).join('');
+
+function calc(){
+  const cs = combos.filter(c => selC.has(c.id));
+  const ss = singles.filter(s => selS.has(s.id));
+  const pct = pctFor(ss.length);
+  const comboReg = cs.reduce((a,c)=>a+c.reg,0), comboNow = cs.reduce((a,c)=>a+c.price,0);
+  const sReg = ss.reduce((a,s)=>a+s.price,0), sNow = sReg*(1-pct);
+  const regular = comboReg + sReg;
+  const sub = comboNow + sNow;
+  const extra = cs.length > 1 ? Math.round(sub*0.05) : 0;
+  const total = sub - extra;
+  return {cs, ss, pct, regular, sub, extra, total, saved: regular - total};
+}
+
+function render(){
+  const r = calc();
+  document.getElementById('p-combos').innerHTML = combos.map(c => `
+    <article class="card rounded-2xl p-5 flex flex-col ${selC.has(c.id)?'sel':''} ${c.star?'sm:col-span-2':''}">
+      <div class="flex items-start justify-between gap-2">
+        <h3 class="text-lg font-bold">${c.name}</h3>
+        <span class="shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 text-xs font-semibold px-2.5 py-1">Ahorrás ${fmt(c.reg-c.price)}</span>
+      </div>
+      <div class="flex flex-wrap gap-2 mt-3">${c.items.map(i=>logo(i,'m')).join('')}</div>
+      <div class="mt-4 flex items-end gap-3">
+        <span class="disp text-3xl font-bold grad">${fmt(c.price)}</span>
+        <span class="text-sm text-[var(--mut)] line-through pb-1">${fmt(c.reg)}</span>
+      </div>
+      <button data-c="${c.id}" class="${selC.has(c.id)?'border border-[var(--cyan)] text-[var(--cyan)]':'btn'} mt-4 rounded-xl py-2.5 text-sm font-semibold">${selC.has(c.id)?'Quitar del pedido':'Agregar al pedido'}</button>
+    </article>`).join('');
+
+  const tier = r.ss.length ? Math.round(r.pct*100) : 10;
+  document.getElementById('singles-grid').innerHTML = singles.map(s => {
+    const on = selS.has(s.id);
+    return `<article class="card rounded-2xl p-5 ${on?'sel':''}">
+      <div>${logo(s.name,'l')}</div>
+      <div class="mt-3 flex items-end gap-3">
+        <span class="disp text-2xl font-bold">${fmt(s.price*(1-(r.ss.length?r.pct:.10)))}</span>
+        <span class="text-sm text-[var(--mut)] line-through pb-0.5">${fmt(s.price)}</span>
+        <span class="ml-auto text-xs rounded-full bg-emerald-500/15 text-emerald-400 px-2.5 py-1 font-semibold">${tier}% OFF</span>
+      </div>
+      <button data-s="${s.id}" class="${on?'border border-[var(--cyan)] text-[var(--cyan)]':'btn'} mt-4 w-full rounded-xl py-2.5 text-sm font-semibold">${on?'Quitar':'Agregar'}</button>
+    </article>`;
+  }).join('');
+
+  const lines = [];
+  r.cs.forEach(c => lines.push(`<li class="flex justify-between gap-2"><span>${c.name}</span><span class="flex items-center gap-2 shrink-0">${fmt(c.price)}<button data-rc="${c.id}" class="text-[var(--mut)] hover:text-red-400" aria-label="Quitar ${c.name}">✕</button></span></li>`));
+  if (r.ss.length) lines.push(`<li><div class="flex justify-between text-[var(--mut)]"><span>Cuentas (${Math.round(r.pct*100)}% OFF)</span><span>${fmt(r.ss.reduce((a,s)=>a+s.price*(1-r.pct),0))}</span></div>${r.ss.map(s=>`<div class="flex justify-between items-center pl-3 mt-1.5">${logo(s.name,'s')}<button data-rs="${s.id}" class="text-[var(--mut)] hover:text-red-400" aria-label="Quitar ${s.name}">✕</button></div>`).join('')}</li>`);
+  document.getElementById('lines').innerHTML = lines.length ? lines.join('') : '<li class="text-[var(--mut)]">Todavía no elegiste nada. Sumá un combo o armá tu pack con cuentas individuales.</li>';
+
+  document.getElementById('t-reg').textContent = fmt(r.regular);
+  document.getElementById('t-save').textContent = fmt(r.saved);
+  document.getElementById('t-total').textContent = fmt(r.total);
+  document.getElementById('t-extra-row').classList.toggle('hidden', !r.extra);
+  document.getElementById('t-extra').textContent = '-' + fmt(r.extra);
+  const n = r.cs.length + r.ss.length;
+  document.getElementById('bar-count').textContent = n ? `${n} ${n===1?'producto':'productos'} · ahorrás ${fmt(r.saved)}` : 'Sin productos';
+  document.getElementById('bar-total').textContent = fmt(r.total);
+  document.getElementById('wa').disabled = !n;
+
+  const up = document.getElementById('upsell');
+  const showUp = !selC.has('pase') && n > 0 && (r.cs.length >= 2 || r.sub > 20000);
+  up.classList.toggle('hidden', !showUp);
+  if (showUp) up.innerHTML = `<p class="font-semibold">¡Llevate el Pase Total de 6 plataformas por solo $25.200 y ahorrá más de $10.000!</p><button id="go-pase" class="btn rounded-lg px-3 py-2 mt-2 text-xs">Cambiar al Pase Total</button>`;
+}
+
+function toggle(set, id){ set.has(id) ? set.delete(id) : set.add(id); render(); }
+
+document.addEventListener('click', e => {
+  const t = e.target.closest('button'); if (!t) return;
+  if (t.dataset.c) toggle(selC, t.dataset.c);
+  else if (t.dataset.s) toggle(selS, t.dataset.s);
+  else if (t.dataset.rc) { selC.delete(t.dataset.rc); render(); }
+  else if (t.dataset.rs) { selS.delete(t.dataset.rs); render(); }
+  else if (t.id === 'go-pase') { selC = new Set(['pase']); selS = new Set(); render(); }
+  else if (t.dataset.tab) {
+    document.querySelectorAll('.tab').forEach(b => { const on = b === t; b.classList.toggle('on', on); b.classList.toggle('text-[var(--mut)]', !on); });
+    document.getElementById('p-combos').classList.toggle('hidden', t.dataset.tab !== 'combos');
+    document.getElementById('p-singles').classList.toggle('hidden', t.dataset.tab !== 'singles');
+  }
+});
+
+document.getElementById('wa').addEventListener('click', () => {
+  const r = calc();
+  const items = [];
+  r.cs.forEach(c => items.push(`- ${c.name}: ${c.items.join(' + ')}`));
+  if (r.ss.length) items.push(`- Cuentas individuales (${Math.round(r.pct*100)}% OFF): ${r.ss.map(s=>s.name).join(', ')}`);
+  let msg = `¡Hola Misakroos! Quiero aprovechar la promo de Cyber Monday:\n\n📦 Mi pedido:\n${items.join('\n')}\n`;
+  if (r.extra) msg += `🎁 Incluye 5% extra por multicombo\n`;
+  msg += `\n💰 Total a pagar: ${fmt(r.total)}\n🎉 Me ahorré: ${fmt(r.saved)}\n\n¿Cuáles son los medios de pago disponibles para activar ya mismo?`;
+  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+});
+
+render();
+</script>
+</body>
+</html>
