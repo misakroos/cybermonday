@@ -7,71 +7,40 @@
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:dark;--bg:#0b0f19;--card:#121827;--line:#232c44;--violet:#8b5cf6;--cyan:#22d3ee;--txt:#e8ecf6;--mut:#8f9ab5}
+:root{color-scheme:dark;--bg:#0b0f19;--card:#111726;--line:#232c44;--violet:#a78bfa;--cyan:#22e5ff;--txt:#e8ecf6;--mut:#8f9ab5}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,sans-serif;margin:0;padding-bottom:84px}
 h1,h2,h3,.disp{font-family:'Space Grotesk',Inter,system-ui,sans-serif}
-.glow{background:radial-gradient(60% 50% at 20% 0%,rgba(139,92,246,.28),transparent),radial-gradient(50% 40% at 90% 10%,rgba(34,211,238,.18),transparent)}
+.neon-c{color:var(--cyan);text-shadow:0 0 14px rgba(34,229,255,.7)}
+.neon-v{color:var(--violet);text-shadow:0 0 14px rgba(167,139,250,.7)}
 .card{background:var(--card);border:1px solid var(--line);transition:border-color .2s,box-shadow .2s}
-.card.sel{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan),0 0 28px rgba(34,211,238,.18)}
-.grad{background:linear-gradient(90deg,var(--violet),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
-.btn{background:linear-gradient(90deg,var(--violet),var(--cyan));color:#06101c;font-weight:700}
-.tab.on{background:linear-gradient(90deg,var(--violet),var(--cyan));color:#06101c}
-.lg-svg{display:block;aspect-ratio:132/36;width:auto;border-radius:8px;box-shadow:0 0 0 1px rgba(255,255,255,.1)}
-.lg-s{height:26px}.lg-m{height:32px}.lg-l{height:38px}
-@media(min-width:640px){.lg-l{height:44px}}
-button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.card.sel{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan),0 0 26px rgba(34,229,255,.28)}
+.pill{border:1px solid var(--violet);box-shadow:0 0 12px rgba(167,139,250,.35);color:var(--violet)}
+.btn{background:var(--cyan);color:#04141a;font-weight:700;box-shadow:0 0 18px rgba(34,229,255,.55);transition:box-shadow .2s,transform .1s}
+.btn:hover:not(:disabled){box-shadow:0 0 28px rgba(34,229,255,.85)}
+.btn:active:not(:disabled){transform:scale(.98)}
+.btn-off{border:1px solid var(--cyan);color:var(--cyan);box-shadow:0 0 12px rgba(34,229,255,.3)}
+.tab.on,.fil.on{background:var(--cyan);color:#04141a;box-shadow:0 0 16px rgba(34,229,255,.55)}
+.chip{display:inline-flex;align-items:center;gap:8px;background:#0b1020;border:1px solid var(--line);border-radius:10px;padding:5px 12px 5px 8px;font-weight:600;white-space:nowrap}
+.chip .ic,.chip .fbm{width:22px;height:22px;object-fit:contain;flex:none}
+.chip .ic{border-radius:5px}
+.fbm{display:inline-grid;place-items:center;border-radius:6px;background:var(--c);color:#06101c;font:700 12px 'Space Grotesk',sans-serif}
+.chip.s{font-size:12px;padding:3px 9px 3px 6px}.chip.s .ic,.chip.s .fbm{width:16px;height:16px;font-size:9px}
+.chip.m{font-size:13px}
+.chip.l{font-size:15px;padding:8px 16px 8px 12px;border-color:var(--c);box-shadow:0 0 14px color-mix(in srgb,var(--c) 40%,transparent)}.chip.l .ic,.chip.l .fbm{width:28px;height:28px;font-size:14px}
+button:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
 </head>
 <body>
 
-<!-- SPRITE de logos SVG (reemplazá cada <symbol> por el logo oficial si lo tenés) -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="l-netflix" viewBox="0 0 132 36">
-    <rect width="132" height="36" rx="8" fill="#000"/>
-    <rect x="10" y="6" width="4.5" height="24" fill="#b20710"/>
-    <rect x="21.5" y="6" width="4.5" height="24" fill="#b20710"/>
-    <polygon points="10,6 14.5,6 26,30 21.5,30" fill="#e50914"/>
-    <text x="34" y="24" font-family="Arial Black,Arial,sans-serif" font-size="17" font-weight="900" fill="#e50914" textLength="88" lengthAdjust="spacingAndGlyphs">NETFLIX</text>
-  </symbol>
-  <symbol id="l-disney" viewBox="0 0 132 36">
-    <rect width="132" height="36" rx="8" fill="#0b1b57"/>
-    <path d="M22 11 Q66 -1 110 11" stroke="#5fb4ff" stroke-width="2" fill="none"/>
-    <text x="66" y="26" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="21" font-style="italic" font-weight="700" fill="#fff">Disney+</text>
-  </symbol>
-  <symbol id="l-prime" viewBox="0 0 132 36">
-    <rect width="132" height="36" rx="8" fill="#0f171e"/>
-    <text x="66" y="20" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="700"><tspan fill="#00a8e1">prime</tspan><tspan fill="#fff"> video</tspan></text>
-    <path d="M30 26 Q64 34 96 25" stroke="#00a8e1" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <path d="M91 21.5 L97 25 L90.5 29" stroke="#00a8e1" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  </symbol>
-  <symbol id="l-paramount" viewBox="0 0 132 36">
-    <rect width="132" height="36" rx="8" fill="#0064ff"/>
-    <polygon points="9,29 20,11 26,20 31,14 43,29" fill="#fff"/>
-    <circle cx="14" cy="9" r="1.4" fill="#fff"/><circle cx="20" cy="6" r="1.4" fill="#fff"/><circle cx="27" cy="6.5" r="1.4" fill="#fff"/><circle cx="33" cy="9" r="1.4" fill="#fff"/>
-    <text x="48" y="23" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#fff" textLength="76" lengthAdjust="spacingAndGlyphs">Paramount+</text>
-  </symbol>
-  <symbol id="l-hbo" viewBox="0 0 132 36">
-    <rect width="132" height="36" rx="8" fill="#000"/>
-    <text x="16" y="26" font-family="Arial Black,Arial,sans-serif" font-size="22" font-weight="900" fill="#fff" textLength="52" lengthAdjust="spacingAndGlyphs">HBO</text>
-    <text x="74" y="26" font-family="Arial Black,Arial,sans-serif" font-size="22" font-weight="900" fill="#a855f7" textLength="44" lengthAdjust="spacingAndGlyphs">max</text>
-  </symbol>
-  <symbol id="l-universal" viewBox="0 0 132 36">
-    <rect width="132" height="36" rx="8" fill="#0a0f1e"/>
-    <text x="12" y="23" font-family="Arial,sans-serif" font-size="15" font-weight="800" fill="#fff" textLength="94" lengthAdjust="spacingAndGlyphs">UNIVERSAL</text>
-    <text x="110" y="24" font-family="Arial,sans-serif" font-size="20" font-weight="800" fill="#f5c518">+</text>
-    <rect x="12" y="28" width="94" height="2" fill="#f5c518"/>
-  </symbol>
-</svg>
-
-<header class="glow">
+<header>
   <div class="max-w-6xl mx-auto px-4 pt-5 flex items-center justify-between">
-    <span class="disp font-bold text-xl tracking-wide">MISAK<span class="grad">ROOS</span></span>
+    <span class="disp font-bold text-xl tracking-wide">MISAK<span class="neon-c">ROOS</span></span>
     <a href="#ofertas" class="text-sm text-[var(--mut)] hover:text-white">Ver ofertas</a>
   </div>
   <div class="max-w-6xl mx-auto px-4 pt-12 pb-12 text-center">
-    <h1 class="text-4xl sm:text-6xl font-bold leading-tight">Cyber Monday en <span class="grad">MISAKROOS</span></h1>
+    <h1 class="text-4xl sm:text-6xl font-bold leading-tight">Cyber Monday en <span class="neon-c">MISAKROOS</span></h1>
     <p class="mt-4 max-w-xl mx-auto text-[var(--mut)] text-base sm:text-lg">Tu streaming favorito con hasta 30% de ahorro. Recibís tu acceso al instante y tenés garantía de activación.</p>
 
     <div class="mt-8 flex flex-wrap justify-center gap-2 text-sm">
@@ -82,11 +51,12 @@ button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 
     <p class="mt-10 text-sm text-[var(--mut)]">Plataformas disponibles</p>
     <div id="logo-strip" class="mt-3 flex flex-wrap justify-center gap-3"></div>
+    <a href="#ofertas" class="btn inline-block rounded-xl px-8 py-3.5 mt-9 text-base">Quiero mi combo</a>
   </div>
 </header>
 
-<main id="ofertas" class="max-w-6xl mx-auto px-4 pb-10">
-  <div class="flex justify-center mb-8">
+<main id="ofertas" class="max-w-6xl mx-auto px-4 pb-10 pt-2">
+  <div class="flex justify-center mb-6">
     <div class="card rounded-full p-1 flex gap-1" role="tablist">
       <button class="tab on rounded-full px-5 py-2.5 text-sm font-semibold" data-tab="combos" role="tab">Combos Cyber</button>
       <button class="tab rounded-full px-5 py-2.5 text-sm font-semibold text-[var(--mut)]" data-tab="singles" role="tab">Cuentas individuales</button>
@@ -95,7 +65,10 @@ button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 
   <div class="grid lg:grid-cols-[1fr_360px] gap-8 items-start">
     <section>
-      <div id="p-combos" class="grid sm:grid-cols-2 gap-4"></div>
+      <div id="p-combos">
+        <div class="flex gap-2 overflow-x-auto pb-3 mb-2" id="filters"></div>
+        <div id="combos-grid" class="grid sm:grid-cols-2 gap-4"></div>
+      </div>
       <div id="p-singles" class="hidden">
         <p class="text-sm text-[var(--mut)] mb-4">Elegí las que quieras: 1 cuenta 10% OFF, 2 cuentas 20% OFF, 3 o más 30% OFF. El descuento se aplica solo.</p>
         <div id="singles-grid" class="grid sm:grid-cols-2 gap-4"></div>
@@ -103,17 +76,17 @@ button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
     </section>
 
     <aside id="resumen" class="lg:sticky lg:top-4">
-      <div class="card rounded-2xl p-5">
+      <div class="card rounded-2xl p-5" style="border-color:var(--violet);box-shadow:0 0 22px rgba(167,139,250,.22)">
         <h2 class="text-xl font-bold mb-3">Resumen de tu pedido</h2>
-        <div id="upsell" class="hidden mb-4 rounded-xl p-3 text-sm border border-[var(--violet)] bg-[rgba(139,92,246,.12)]"></div>
+        <div id="upsell" class="hidden mb-4 rounded-xl p-3 text-sm pill"></div>
         <ul id="lines" class="space-y-2 text-sm mb-4"></ul>
         <div class="border-t border-[var(--line)] pt-3 space-y-1.5 text-sm">
           <div class="flex justify-between text-[var(--mut)]"><span>Subtotal regular</span><span id="t-reg" class="line-through">$0</span></div>
-          <div id="t-extra-row" class="hidden flex justify-between text-[var(--cyan)]"><span>Extra multicombo 5%</span><span id="t-extra"></span></div>
-          <div class="flex justify-between font-semibold text-emerald-400"><span>Ahorrás</span><span id="t-save">$0</span></div>
+          <div id="t-extra-row" class="hidden flex justify-between neon-c"><span>Extra multicombo 5%</span><span id="t-extra"></span></div>
+          <div class="flex justify-between font-semibold text-emerald-400" style="text-shadow:0 0 10px rgba(52,211,153,.5)"><span>Ahorrás</span><span id="t-save">$0</span></div>
           <div class="flex justify-between items-end pt-2"><span class="text-[var(--mut)]">Total a pagar</span><span id="t-total" class="disp text-3xl font-bold">$0</span></div>
         </div>
-        <button id="wa" class="btn w-full mt-5 rounded-xl py-3.5 text-base disabled:opacity-40 disabled:cursor-not-allowed" disabled>Completar pedido por WhatsApp</button>
+        <button id="wa" class="btn w-full mt-5 rounded-xl py-3.5 text-base disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none" disabled>Completar pedido por WhatsApp</button>
         <p class="text-xs text-[var(--mut)] mt-3 text-center">Te respondemos al instante con los medios de pago.</p>
       </div>
     </aside>
@@ -122,7 +95,7 @@ button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 
 <footer class="text-center text-xs text-[var(--mut)] pb-6 px-4">© MISAKROOS. Precios en pesos argentinos (ARS). Las marcas pertenecen a sus respectivos dueños.</footer>
 
-<div class="lg:hidden fixed bottom-0 inset-x-0 z-20 bg-[#0b0f19]/95 backdrop-blur border-t border-[var(--line)] px-4 pt-3" style="padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))">
+<div class="lg:hidden fixed bottom-0 inset-x-0 z-20 bg-[#0b0f19] border-t border-[var(--line)] px-4 pt-3" style="padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))">
   <div class="flex items-center gap-3">
     <div class="flex-1">
       <div class="text-xs text-[var(--mut)]" id="bar-count">Sin productos</div>
@@ -136,27 +109,66 @@ button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
 const WA = '5492645182955';
 const fmt = n => '$' + Math.round(n).toLocaleString('es-AR');
 
-const SYMBOL = {'Netflix':'l-netflix','Disney+':'l-disney','Prime Video':'l-prime','Paramount+':'l-paramount','HBO Max':'l-hbo','Universal+':'l-universal'};
-const logo = (name, size='m') => `<svg class="lg-svg lg-${size}" viewBox="0 0 132 36" role="img" aria-label="${name}"><use href="#${SYMBOL[name]}"/></svg>`;
+/* ---------- LOGOS 100% ONLINE ----------
+   Orden de búsqueda para cada plataforma:
+   1) Simple Icons (logo vectorial de la marca)  2) Ícono oficial del sitio web vía Google  3) Insignia con inicial */
+const BRANDS = {
+  'Netflix':     {slug:'netflix',       domain:'netflix.com',       c:'E50914', i:'N'},
+  'Disney+':     {slug:'disneyplus',    domain:'disneyplus.com',    c:'4F7CFF', i:'D+'},
+  'Prime Video': {slug:'primevideo',    domain:'primevideo.com',    c:'00A8E1', i:'P'},
+  'Paramount+':  {slug:'paramountplus', domain:'paramountplus.com', c:'2F7BFF', i:'P+'},
+  'HBO Max':     {slug:'hbomax',        domain:'max.com',           c:'A855F7', i:'H'},
+  'Universal+':  {slug:null,            domain:'universalplus.com', c:'F5C518', i:'U+'}
+};
+const sources = n => {
+  const b = BRANDS[n], s = [];
+  if (b.slug) s.push(`https://cdn.simpleicons.org/${b.slug}/${b.c}`);
+  s.push(`https://www.google.com/s2/favicons?domain=${b.domain}&sz=128`);
+  return s;
+};
+const fallback = n => `<span class="fbm" style="--c:#${BRANDS[n].c}">${BRANDS[n].i}</span>`;
+function logo(name, size='m'){
+  const b = BRANDS[name];
+  return `<span class="chip ${size}" style="--c:#${b.c}" title="${name}"><img class="ic" src="${sources(name)[0]}" alt="" loading="lazy" referrerpolicy="no-referrer" data-n="${name}" data-s="0"><span>${name}</span></span>`;
+}
+// Si una fuente falla, prueba la siguiente; si fallan todas, muestra la insignia
+document.addEventListener('error', e => {
+  const t = e.target;
+  if (t.tagName !== 'IMG' || !t.dataset.n) return;
+  const next = sources(t.dataset.n)[+t.dataset.s + 1];
+  if (next) { t.dataset.s = +t.dataset.s + 1; t.src = next; }
+  else t.outerHTML = fallback(t.dataset.n);
+}, true);
 
+/* ---------- DATOS ---------- */
+const P = {'Netflix':8500,'Disney+':7500,'Prime Video':5000,'Paramount+':5000,'HBO Max':5000,'Universal+':5000};
 const combos = [
-  {id:'duo-cine', name:'Dúo Cine & Series', items:['Prime Video','HBO Max'], reg:10000, price:7500},
-  {id:'duo-premium', name:'Dúo Premium', items:['Netflix','Disney+'], reg:16000, price:12800},
-  {id:'trio', name:'Trío Maratón', items:['Prime Video','Paramount+','HBO Max'], reg:15000, price:10500},
+  // 2 servicios
+  {id:'d1', name:'Dúo Cine & Series', items:['Prime Video','HBO Max'], reg:10000, price:7500},
+  {id:'d2', name:'Dúo Premium', items:['Netflix','Disney+'], reg:16000, price:12800},
+  {id:'d3', name:'Dúo Maratón', items:['Netflix','HBO Max'], reg:13500, price:10800},
+  {id:'d4', name:'Dúo Familiar', items:['Disney+','Paramount+'], reg:12500, price:10000},
+  // 3 servicios
+  {id:'t1', name:'Trío Maratón', items:['Prime Video','Paramount+','HBO Max'], reg:15000, price:10500},
+  {id:'t2', name:'Trío Estrenos', items:['Netflix','Prime Video','HBO Max'], reg:18500, price:13000},
+  {id:'t3', name:'Trío Familiar', items:['Netflix','Disney+','Paramount+'], reg:21000, price:14700},
+  // 4 servicios
+  {id:'c1', name:'Cuarteto Top', items:['Netflix','Disney+','Prime Video','HBO Max'], reg:26000, price:18200},
+  {id:'c2', name:'Cuarteto Económico', items:['Prime Video','Paramount+','HBO Max','Universal+'], reg:20000, price:14000},
+  {id:'c3', name:'Cuarteto Series', items:['Netflix','Prime Video','Paramount+','HBO Max'], reg:23500, price:16500},
+  // 5 servicios
+  {id:'q1', name:'Quinteto Sin Netflix', items:['Disney+','Prime Video','Paramount+','HBO Max','Universal+'], reg:27500, price:19250},
+  {id:'q2', name:'Quinteto Sin Disney+', items:['Netflix','Prime Video','Paramount+','HBO Max','Universal+'], reg:28500, price:19950},
+  {id:'q3', name:'Quinteto Sin Universal+', items:['Netflix','Disney+','Prime Video','Paramount+','HBO Max'], reg:31000, price:21700},
+  // 6 servicios
   {id:'pase', name:'Pase Total Streaming (6 plataformas)', items:['Netflix','Disney+','Prime Video','Paramount+','HBO Max','Universal+'], reg:36000, price:25200, star:true}
 ];
-const singles = [
-  {id:'netflix', name:'Netflix', price:8500},
-  {id:'disney', name:'Disney+', price:7500},
-  {id:'prime', name:'Prime Video', price:5000},
-  {id:'paramount', name:'Paramount+', price:5000},
-  {id:'hbo', name:'HBO Max', price:5000},
-  {id:'universal', name:'Universal+', price:5000}
-];
-let selC = new Set(), selS = new Set();
+const singles = Object.keys(P).map(n => ({id:n, name:n, price:P[n]}));
+
+let selC = new Set(), selS = new Set(), filter = 'all';
 const pctFor = n => n === 0 ? 0 : n === 1 ? .10 : n === 2 ? .20 : .30;
 
-document.getElementById('logo-strip').innerHTML = Object.keys(SYMBOL).map(n => logo(n, 'l')).join('');
+document.getElementById('logo-strip').innerHTML = Object.keys(BRANDS).map(n => logo(n,'l')).join('');
 
 function calc(){
   const cs = combos.filter(c => selC.has(c.id));
@@ -173,19 +185,27 @@ function calc(){
 
 function render(){
   const r = calc();
-  document.getElementById('p-combos').innerHTML = combos.map(c => `
-    <article class="card rounded-2xl p-5 flex flex-col ${selC.has(c.id)?'sel':''} ${c.star?'sm:col-span-2':''}">
+
+  const sizes = ['all',2,3,4,5,6];
+  document.getElementById('filters').innerHTML = sizes.map(s =>
+    `<button data-f="${s}" class="fil card rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap ${filter==s?'on':'text-[var(--mut)]'}">${s==='all'?'Todos':s+' servicios'}</button>`).join('');
+
+  const list = combos.filter(c => filter === 'all' || c.items.length == filter);
+  document.getElementById('combos-grid').innerHTML = list.map(c => {
+    const on = selC.has(c.id), off = Math.round((c.reg-c.price)/c.reg*100);
+    return `<article class="card rounded-2xl p-5 flex flex-col ${on?'sel':''} ${c.star?'sm:col-span-2':''}">
       <div class="flex items-start justify-between gap-2">
-        <h3 class="text-lg font-bold">${c.name}</h3>
-        <span class="shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 text-xs font-semibold px-2.5 py-1">Ahorrás ${fmt(c.reg-c.price)}</span>
+        <div><h3 class="text-lg font-bold leading-snug">${c.name}</h3><p class="text-xs text-[var(--mut)] mt-0.5">${c.items.length} servicios · ${off}% OFF</p></div>
+        <span class="pill shrink-0 rounded-full text-xs font-semibold px-2.5 py-1">Ahorrás ${fmt(c.reg-c.price)}</span>
       </div>
       <div class="flex flex-wrap gap-2 mt-3">${c.items.map(i=>logo(i,'m')).join('')}</div>
       <div class="mt-4 flex items-end gap-3">
-        <span class="disp text-3xl font-bold grad">${fmt(c.price)}</span>
+        <span class="disp text-3xl font-bold neon-c">${fmt(c.price)}</span>
         <span class="text-sm text-[var(--mut)] line-through pb-1">${fmt(c.reg)}</span>
       </div>
-      <button data-c="${c.id}" class="${selC.has(c.id)?'border border-[var(--cyan)] text-[var(--cyan)]':'btn'} mt-4 rounded-xl py-2.5 text-sm font-semibold">${selC.has(c.id)?'Quitar del pedido':'Agregar al pedido'}</button>
-    </article>`).join('');
+      <button data-c="${c.id}" class="${on?'btn-off':'btn'} mt-4 rounded-xl py-2.5 text-sm font-semibold">${on?'Quitar del pedido':'Agregar al pedido'}</button>
+    </article>`;
+  }).join('');
 
   const tier = r.ss.length ? Math.round(r.pct*100) : 10;
   document.getElementById('singles-grid').innerHTML = singles.map(s => {
@@ -195,9 +215,9 @@ function render(){
       <div class="mt-3 flex items-end gap-3">
         <span class="disp text-2xl font-bold">${fmt(s.price*(1-(r.ss.length?r.pct:.10)))}</span>
         <span class="text-sm text-[var(--mut)] line-through pb-0.5">${fmt(s.price)}</span>
-        <span class="ml-auto text-xs rounded-full bg-emerald-500/15 text-emerald-400 px-2.5 py-1 font-semibold">${tier}% OFF</span>
+        <span class="pill ml-auto text-xs rounded-full px-2.5 py-1 font-semibold">${tier}% OFF</span>
       </div>
-      <button data-s="${s.id}" class="${on?'border border-[var(--cyan)] text-[var(--cyan)]':'btn'} mt-4 w-full rounded-xl py-2.5 text-sm font-semibold">${on?'Quitar':'Agregar'}</button>
+      <button data-s="${s.id}" class="${on?'btn-off':'btn'} mt-4 w-full rounded-xl py-2.5 text-sm font-semibold">${on?'Quitar':'Agregar'}</button>
     </article>`;
   }).join('');
 
@@ -228,6 +248,7 @@ document.addEventListener('click', e => {
   const t = e.target.closest('button'); if (!t) return;
   if (t.dataset.c) toggle(selC, t.dataset.c);
   else if (t.dataset.s) toggle(selS, t.dataset.s);
+  else if (t.dataset.f) { filter = t.dataset.f; render(); }
   else if (t.dataset.rc) { selC.delete(t.dataset.rc); render(); }
   else if (t.dataset.rs) { selS.delete(t.dataset.rs); render(); }
   else if (t.id === 'go-pase') { selC = new Set(['pase']); selS = new Set(); render(); }
