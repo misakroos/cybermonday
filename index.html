@@ -29,7 +29,7 @@ h1,h2,h3,.disp{font-family:'Space Grotesk',Inter,system-ui,sans-serif}
 .chip.l{font-size:15px;padding:8px 14px 8px 10px;border-color:var(--c);box-shadow:0 0 14px color-mix(in srgb,var(--c) 45%,transparent)}.chip.l .ic,.chip.l .fbm{width:28px;height:28px;font-size:14px}
 .ico{width:26px;height:26px;border-radius:7px;background:#0b1020;border:1px solid var(--line);display:grid;place-items:center}
 .ico img,.ico .fbm{width:18px;height:18px;object-fit:contain;border-radius:4px}
-.bchip{display:flex;align-items:center;gap:10px;min-height:52px;padding:8px 12px;border-radius:12px;background:#0b1020;border:1px solid var(--line);text-align:left;transition:.2s}
+.bchip{display:flex;align-items:center;gap:10px;min-height:52px;padding:8px 12px;border-radius:12px;background:#0b1020;border:1px solid var(--line);text-align:left;transition:.2s;color:#e8ecf6}
 .bchip.on{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan),0 0 18px rgba(34,229,255,.35)}
 .bchip .ic{width:26px;height:26px;object-fit:contain;border-radius:6px}.bchip .fbm{width:26px;height:26px;border-radius:6px}
 .logo-go{background:none;border:0;padding:0}
@@ -43,7 +43,7 @@ h1,h2,h3,.disp{font-family:'Space Grotesk',Inter,system-ui,sans-serif}
 .chev{transition:transform .2s}
 .mini-row{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x proximity;scrollbar-width:none}
 .mini-row::-webkit-scrollbar{display:none}
-.mini{flex:none;width:176px;scroll-snap-align:start;text-align:left}
+.mini{flex:none;width:176px;scroll-snap-align:start;text-align:left;color:#e8ecf6}
 #q{background:#0b1020;border:1px solid var(--cyan);box-shadow:0 0 14px rgba(34,229,255,.3);color:#fff;font-size:16px}
 #q:focus{outline:none;box-shadow:0 0 22px rgba(34,229,255,.6)}
 button:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
@@ -82,11 +82,10 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offse
   </div>
 </header>
 
-<!-- ARMÁ TU COMBO -->
 <section id="armar" class="max-w-6xl mx-auto px-4 pb-8">
   <div class="card rounded-2xl p-4 sm:p-6" style="border-color:var(--cyan);box-shadow:0 0 26px rgba(34,229,255,.25)">
     <h2 class="text-2xl font-bold">Armá tu <span class="neon-c">combo</span></h2>
-    <p class="text-sm text-[var(--mut)] mt-1">Buscá y elegí las plataformas. Mientras más sumás, más descuento: 1 = 10%, 2 = 20%, 3 o más = 30%.</p>
+    <p class="text-sm text-[var(--mut)] mt-1">Elegí las plataformas (o buscalas por nombre). Mientras más sumás, más descuento: 1 = 10%, 2 = 20%, 3 o más = 30%.</p>
     <div class="relative mt-4">
       <svg class="absolute left-3 top-1/2 -translate-y-1/2" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22e5ff" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
       <input id="q" type="search" autocomplete="off" placeholder="Buscar plataforma (Netflix, Prime, HBO…)" class="w-full rounded-xl pl-11 pr-4 py-3.5" aria-label="Buscar plataforma">
@@ -97,7 +96,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offse
 </section>
 
 <main id="ofertas" class="max-w-6xl mx-auto px-4 pb-10">
-  <div class="sticky top-0 z-30 bg-[#0b0f19] py-2 -mx-4 px-4 flex justify-center" style="padding-top:calc(8px + env(safe-area-inset-top,0px))">
+  <div class="sticky top-0 z-30 bg-[#0b0f19] py-2 -mx-4 px-4 flex justify-center">
     <div class="card rounded-full p-1 flex gap-1 w-full max-w-md" role="tablist">
       <button class="tab on flex-1 rounded-full px-3 py-3 text-sm font-semibold" data-tab="combos" role="tab">Combos Cyber</button>
       <button class="tab flex-1 rounded-full px-3 py-3 text-sm font-semibold text-[var(--mut)]" data-tab="singles" role="tab">Cuentas individuales</button>
@@ -147,12 +146,16 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offse
 </div>
 
 <script>
-const WA = '5492645182955';
-const fmt = n => '$' + Math.round(n).toLocaleString('es-AR');
-const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+var WA = '5492645182955';
+function fmt(n){ return '$' + Math.round(n).toLocaleString('es-AR'); }
+function norm(s){
+  var out = '', t = String(s).normalize('NFD');
+  for (var i = 0; i !== t.length; i++) { var c = t.charCodeAt(i); if (c > 879 || 768 > c) out += t.charAt(i); }
+  return out.toLowerCase();
+}
 
-/* ---------- LOGOS ONLINE (Simple Icons → favicon vía Google → insignia) ---------- */
-const BRANDS = {
+/* ---------- LOGOS ONLINE (Simple Icons, favicon vía Google, insignia) ---------- */
+var BRANDS = {
   'Netflix':     {k:'netflix',   slug:'netflix',       domain:'netflix.com',       c:'E50914', i:'N',  al:''},
   'Disney+':     {k:'disney',    slug:'disneyplus',    domain:'disneyplus.com',    c:'4F7CFF', i:'D+', al:'disney plus'},
   'Prime Video': {k:'prime',     slug:'primevideo',    domain:'primevideo.com',    c:'00A8E1', i:'P',  al:'amazon'},
@@ -160,19 +163,27 @@ const BRANDS = {
   'HBO Max':     {k:'hbo',       slug:'hbomax',        domain:'max.com',           c:'A855F7', i:'H',  al:'max'},
   'Universal+':  {k:'universal', slug:null,            domain:'universalplus.com', c:'F5C518', i:'U+', al:'universal plus'}
 };
-const sources = n => { const b = BRANDS[n], s = []; if (b.slug) s.push(`https://cdn.simpleicons.org/${b.slug}/${b.c}`); s.push(`https://www.google.com/s2/favicons?domain=${b.domain}&sz=128`); return s; };
-const fallback = n => `<span class="fbm" style="--c:#${BRANDS[n].c}">${BRANDS[n].i}</span>`;
-const img = n => `<img class="ic" src="${sources(n)[0]}" alt="" loading="lazy" referrerpolicy="no-referrer" data-n="${n}" data-s="0">`;
-const logo = (n, size='m') => `<span class="chip ${size}" style="--c:#${BRANDS[n].c}" title="${n}">${img(n)}<span>${n}</span></span>`;
-const ico = n => `<span class="ico" title="${n}" style="border-color:#${BRANDS[n].c}55">${img(n)}</span>`;
-document.addEventListener('error', e => {
-  const t = e.target; if (t.tagName !== 'IMG' || !t.dataset.n) return;
-  const next = sources(t.dataset.n)[+t.dataset.s + 1];
+function sources(n){
+  var b = BRANDS[n], s = [];
+  if (b.slug) s.push('https://cdn.simpleicons.org/' + b.slug + '/' + b.c);
+  s.push('https://www.google.com/s2/favicons?domain=' + b.domain + '&sz=128');
+  return s;
+}
+function fallback(n){ return '<span class="fbm" style="--c:#' + BRANDS[n].c + '">' + BRANDS[n].i + '</span>'; }
+function img(n){ return '<img class="ic" src="' + sources(n)[0] + '" alt="" loading="lazy" referrerpolicy="no-referrer" data-n="' + n + '" data-s="0">'; }
+function logo(n, size){
+  size = size || 'm';
+  return '<span class="chip ' + size + '" style="--c:#' + BRANDS[n].c + '" title="' + n + '">' + img(n) + '<span>' + n + '</span></span>';
+}
+function ico(n){ return '<span class="ico" title="' + n + '" style="border-color:#' + BRANDS[n].c + '55">' + img(n) + '</span>'; }
+document.addEventListener('error', function(e){
+  var t = e.target; if (!t || t.tagName !== 'IMG' || !t.dataset.n) return;
+  var next = sources(t.dataset.n)[+t.dataset.s + 1];
   if (next) { t.dataset.s = +t.dataset.s + 1; t.src = next; } else t.outerHTML = fallback(t.dataset.n);
 }, true);
 
 /* ---------- INFO DE PLATAFORMAS (editable) · Destacados al 2/11/2026 ---------- */
-const INFO = {
+var INFO = {
   'Netflix': {one:'Series, películas y documentales originales con estrenos cada semana.',
     more:'Incluye series y películas originales, documentales, contenido infantil y juegos. Podés verlo en celular, tele, tablet y compu, con perfiles para cada persona.',
     hot:{t:'Palomas negras – Temporada 2', d:'Vuelve el thriller de espías con Keira Knightley. Estreno el 5 de noviembre.'}},
@@ -194,8 +205,8 @@ const INFO = {
 };
 
 /* ---------- DATOS ---------- */
-const P = {'Netflix':8500,'Disney+':7500,'Prime Video':5000,'Paramount+':5000,'HBO Max':5000,'Universal+':5000};
-const combos = [
+var P = {'Netflix':8500,'Disney+':7500,'Prime Video':5000,'Paramount+':5000,'HBO Max':5000,'Universal+':5000};
+var combos = [
   {id:'d1', name:'Dúo Cine & Series', items:['Prime Video','HBO Max'], reg:10000, price:7500},
   {id:'d2', name:'Dúo Premium', items:['Netflix','Disney+'], reg:16000, price:12800},
   {id:'d3', name:'Dúo Maratón', items:['Netflix','HBO Max'], reg:13500, price:10800},
@@ -211,37 +222,37 @@ const combos = [
   {id:'q3', name:'Quinteto Sin Universal+', items:['Netflix','Disney+','Prime Video','Paramount+','HBO Max'], reg:31000, price:21700},
   {id:'pase', name:'Pase Total Streaming (6 plataformas)', items:['Netflix','Disney+','Prime Video','Paramount+','HBO Max','Universal+'], reg:36000, price:25200, star:true}
 ];
-const singles = Object.keys(P).map(n => ({id:BRANDS[n].k, name:n, price:P[n]}));
+var singles = Object.keys(P).map(function(n){ return {id:BRANDS[n].k, name:n, price:P[n]}; });
 
-let selC = new Set(), selS = new Set(), open = new Set(), filter = 'all', query = '';
-const pctFor = n => n === 0 ? 0 : n === 1 ? .10 : n === 2 ? .20 : .30;
-
-document.getElementById('logo-strip').innerHTML = Object.keys(BRANDS).map(n => `<button class="logo-go" data-go="${BRANDS[n].k}" aria-label="Ir a ${n}">${logo(n,'l')}</button>`).join('');
+var selC = new Set(), selS = new Set(), expanded = new Set(), filterSize = 'all', query = '';
+function pctFor(n){ return n === 0 ? 0 : n === 1 ? 0.10 : n === 2 ? 0.20 : 0.30; }
 
 function calc(){
-  const cs = combos.filter(c => selC.has(c.id)), ss = singles.filter(s => selS.has(s.id));
-  const pct = pctFor(ss.length);
-  const comboReg = cs.reduce((a,c)=>a+c.reg,0), comboNow = cs.reduce((a,c)=>a+c.price,0);
-  const sReg = ss.reduce((a,s)=>a+s.price,0), sNow = sReg*(1-pct);
-  const regular = comboReg + sReg, sub = comboNow + sNow;
-  const extra = cs.length > 1 ? Math.round(sub*0.05) : 0, total = sub - extra;
-  return {cs, ss, pct, sReg, sNow, regular, sub, extra, total, saved: regular - total};
+  var cs = combos.filter(function(c){ return selC.has(c.id); });
+  var ss = singles.filter(function(s){ return selS.has(s.id); });
+  var pct = pctFor(ss.length);
+  var comboReg = cs.reduce(function(a,c){ return a + c.reg; }, 0);
+  var comboNow = cs.reduce(function(a,c){ return a + c.price; }, 0);
+  var sReg = ss.reduce(function(a,s){ return a + s.price; }, 0);
+  var sNow = sReg * (1 - pct);
+  var regular = comboReg + sReg, sub = comboNow + sNow;
+  var extra = cs.length > 1 ? Math.round(sub * 0.05) : 0;
+  var total = sub - extra;
+  return {cs:cs, ss:ss, pct:pct, sReg:sReg, sNow:sNow, regular:regular, sub:sub, extra:extra, total:total, saved:regular - total};
 }
+function $(id){ return document.getElementById(id); }
 
 /* ---------- ARMÁ TU COMBO ---------- */
 function renderBuilder(){
-  const r = calc(), q = norm(query.trim());
-  const list = singles.filter(s => !q || norm(s.name).includes(q) || norm(BRANDS[s.name].al).includes(q));
-  document.getElementById('bld-chips').innerHTML = list.length ? list.map(s => {
-    const on = selS.has(s.id);
-    return `<button data-b="${s.id}" aria-pressed="${on}" class="bchip ${on?'on':''}">${img(s.name)}<span class="flex-1 min-w-0"><span class="block text-sm font-semibold truncate">${s.name}</span><span class="block text-xs text-[var(--mut)]">${fmt(s.price)}</span></span><span class="${on?'neon-c':'text-[var(--mut)]'} text-lg">${on?'✓':'+'}</span></button>`;
-  }).join('') : `<p class="col-span-full text-sm text-[var(--mut)]">No encontramos esa plataforma. Probá con otro nombre.</p>`;
+  var r = calc(), q = norm(query.trim());
+  var list = singles.filter(function(s){ return !q || norm(s.name).indexOf(q) !== -1 || norm(BRANDS[s.name].al).indexOf(q) !== -1; });
+  $('bld-chips').innerHTML = list.length ? list.map(function(s){
+    var on = selS.has(s.id);
+    return '<button data-b="' + s.id + '" aria-pressed="' + on + '" class="bchip ' + (on ? 'on' : '') + '">' + img(s.name) +
+      '<span class="flex-1 min-w-0"><span class="block text-sm font-semibold truncate">' + s.name + '</span><span class="block text-xs text-[var(--mut)]">' + fmt(s.price) + '</span></span>' +
+      '<span class="' + (on ? 'neon-c' : 'text-[var(--mut)]') + ' text-lg">' + (on ? '✓' : '+') + '</span></button>';
+  }).join('') : '<p class="col-span-full text-sm text-[var(--mut)]">No encontramos esa plataforma. Probá con otro nombre.</p>';
 
-  const el = document.getElementById('bld-res');
-  if (!r.ss.length){ el.innerHTML = `<p class="text-sm text-[var(--mut)] text-center">Elegí al menos una plataforma para ver tu precio.</p>`; return; }
-  const sel = r.ss.map(s => s.name);
-  const m = combos.find(c => c.items.length === sel.length && sel.every(x => c.items.includes(x)));
-  const better = m && m.price < r.sNow;
-  el.innerHTML = `
-    <div class="rounded-xl p-4" style="background:#0b1020;border:1px solid var(--line)">
-      <div class="flex flex-wrap gap-1.5 mb-3">${r.
+  var el = $('bld-res');
+  if (!r.ss.length) { el.innerHTML = '<p class="text-sm text-[var(--mut)] text-center">Elegí al menos una plataforma para ver tu precio.</p>'; return; }
+  
