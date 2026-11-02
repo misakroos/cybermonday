@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cyber Monday en MISAKROOS</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#0b0f19;--card:#111726;--line:#232c44;--violet:#a78bfa;--cyan:#22e5ff;--pink:#ff4fd8;--mut:#8f9ab5}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:#e8ecf6;font-family:Inter,system-ui,sans-serif;margin:0;padding-bottom:92px;-webkit-tap-highlight-color:transparent}
+h1,h2,h3,.disp{font-family:'Space Grotesk',Inter,system-ui,sans-serif}
+.neon-c{color:var(--cyan);text-shadow:0 0 10px rgba(34,229,255,.8),0 0 26px rgba(34,229,255,.45)}
+.neon-v{color:var(--violet);text-shadow:0 0 10px rgba(167,139,250,.8),0 0 26px rgba(167,139,250,.45)}
+.card{background:var(--card);border:1px solid var(--line);transition:border-color .2s,box-shadow .2s}
+.card.sel{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan),0 0 26px rgba(34,229,255,.3)}
+.pill{border:1px solid var(--violet);box-shadow:0 0 12px rgba(167,139,250,.4);color:var(--violet)}
+.btn{background:var(--cyan);color:#04141a;font-weight:700;box-shadow:0 0 18px rgba(34,229,255,.6);transition:box-shadow .2s,transform .1s;min-height:46px}
+.btn:hover:not(:disabled){box-shadow:0 0 30px rgba(34,229,255,.9)}
+.btn:active:not(:disabled){transform:scale(.98)}
+.btn-off{border:1px solid var(--cyan);color:var(--cyan);box-shadow:0 0 12px rgba(34,229,255,.3);min-height:46px}
+.tab.on,.fil.on{background:var(--cyan);color:#04141a;box-shadow:0 0 16px rgba(34,229,255,.6)}
+.chip{display:inline-flex;align-items:center;gap:8px;background:#0b1020;border:1px solid var(--line);border-radius:10px;padding:5px 12px 5px 8px;font-weight:600;white-space:nowrap}
+.chip .ic,.chip .fbm{width:22px;height:22px;object-fit:contain;flex:none;border-radius:5px}
+.fbm{display:inline-grid;place-items:center;background:var(--c);color:#06101c;font:700 12px 'Space Grotesk',sans-serif}
+.chip.s{font-size:12px;padding:3px 9px 3px 6px}.chip.s .ic,.chip.s .fbm{width:16px;height:16px;font-size:9px}
+.chip.m{font-size:13px}
+.chip.l{font-size:15px;padding:8px 14px 8px 10px;border-color:var(--c);box-shadow:0 0 14px color-mix(in srgb,var(--c) 45%,transparent)}.chip.l .ic,.chip.l .fbm{width:28px;height:28px;font-size:14px}
+.ico{width:26px;height:26px;border-radius:7px;background:#0b1020;border:1px solid var(--line);display:grid;place-items:center}
+.ico img,.ico .fbm{width:18px;height:18px;object-fit:contain;border-radius:4px}
+.bchip{display:flex;align-items:center;gap:10px;min-height:52px;padding:8px 12px;border-radius:12px;background:#0b1020;border:1px solid var(--line);text-align:left;transition:.2s;color:#e8ecf6}
+.bchip.on{border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan),0 0 18px rgba(34,229,255,.35)}
+.bchip .ic{width:26px;height:26px;object-fit:contain;border-radius:6px}.bchip .fbm{width:26px;height:26px;border-radius:6px}
+.logo-go{background:none;border:0;padding:0}
+.logo-go:active .chip{transform:scale(.96)}
+.svc{scroll-margin-top:76px}
+.svc.pulse{animation:pulse 1.4s ease-out 1}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,229,255,.9)}100%{box-shadow:0 0 0 22px rgba(34,229,255,0)}}
+.deco{position:absolute;color:var(--c);filter:drop-shadow(0 0 5px var(--c)) drop-shadow(0 0 16px var(--c));opacity:.75;animation:fl 7s ease-in-out infinite;pointer-events:none}
+@keyframes fl{50%{transform:translateY(-10px) rotate(6deg)}}
+[aria-expanded=true] .chev{transform:rotate(180deg)}
+.chev{transition:transform .2s}
+.mini-row{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x proximity;scrollbar-width:none}
+.mini-row::-webkit-scrollbar{display:none}
+.mini{flex:none;width:176px;scroll-snap-align:start;text-align:left;color:#e8ecf6}
+#q{background:#0b1020;border:1px solid var(--cyan);box-shadow:0 0 14px rgba(34,229,255,.3);color:#fff;font-size:16px}
+#q:focus{outline:none;box-shadow:0 0 22px rgba(34,229,255,.6)}
+button:focus-visible,a:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 8l6 4-6 4z" fill="currentColor"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 0 0 8v2h18v-2a2 2 0 0 1 0-8V6H3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 6v12" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2 2"/></symbol>
+</svg>
+
+<header class="relative overflow-hidden">
+  <svg class="deco" style="--c:var(--cyan);width:54px;height:54px;top:68px;left:10px"><use href="#i-play"/></svg>
+  <svg class="deco" style="--c:var(--pink);width:34px;height:34px;top:150px;right:14px;animation-delay:-2s"><use href="#i-star"/></svg>
+  <svg class="deco" style="--c:var(--violet);width:44px;height:44px;top:330px;left:6px;animation-delay:-4s"><use href="#i-film"/></svg>
+  <svg class="deco" style="--c:var(--cyan);width:40px;height:40px;top:390px;right:8px;animation-delay:-1s"><use href="#i-ticket"/></svg>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-4 pt-5 flex items-center justify-between">
+    <span class="disp font-bold text-xl tracking-wide">MISAK<span class="neon-c">ROOS</span></span>
+    <span class="pill rounded-full text-xs font-semibold px-3 py-1">Cyber Monday</span>
+  </div>
+  <div class="relative z-10 max-w-6xl mx-auto px-4 pt-10 pb-8 text-center">
+    <h1 class="text-4xl sm:text-6xl font-bold leading-tight">Cyber Monday en <span class="neon-c">MISAKROOS</span></h1>
+    <p class="mt-4 max-w-xl mx-auto text-[var(--mut)] text-base sm:text-lg">Tu streaming favorito con hasta 30% de ahorro. Recibís tu acceso al instante y tenés garantía de activación.</p>
+    <div class="mt-6 flex flex-wrap justify-center gap-2 text-sm">
+      <span class="card rounded-full px-3.5 py-2">⚡ Entrega inmediata</span>
+      <span class="card rounded-full px-3.5 py-2">🛡️ Garantía de activación</span>
+      <span class="card rounded-full px-3.5 py-2">✅ Cuentas originales</span>
+    </div>
+    <p class="mt-8 text-sm text-[var(--mut)]">Tocá una plataforma para ver su precio y combos</p>
+    <div id="logo-strip" class="mt-3 flex flex-wrap justify-center gap-2.5"></div>
+  </div>
+</header>
+
+<section id="armar" class="max-w-6xl mx-auto px-4 pb-8">
+  <div class="card rounded-2xl p-4 sm:p-6" style="border-color:var(--cyan);box-shadow:0 0 26px rgba(34,229,255,.25)">
+    <h2 class="text-2xl font-bold">Armá tu <span class="neon-c">combo</span></h2>
+    <p class="text-sm text-[var(--mut)] mt-1">Elegí las plataformas (o buscalas por nombre). Mientras más sumás, más descuento: 1 = 10%, 2 = 20%, 3 o más = 30%.</p>
+    <div class="relative mt-4">
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22e5ff" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      <input id="q" type="search" autocomplete="off" placeholder="Buscar plataforma (Netflix, Prime, HBO…)" class="w-full rounded-xl pl-11 pr-4 py-3.5" aria-label="Buscar plataforma">
+    </div>
+    <div id="bld-chips" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mt-4"></div>
+    <div id="bld-res" class="mt-5"></div>
+  </div>
+</section>
+
+<main id="ofertas" class="max-w-6xl mx-auto px-4 pb-10">
+  <div class="sticky top-0 z-30 bg-[#0b0f19] py-2 -mx-4 px-4 flex justify-center">
+    <div class="card rounded-full p-1 flex gap-1 w-full max-w-md" role="tablist">
+      <button class="tab on flex-1 rounded-full px-3 py-3 text-sm font-semibold" data-tab="combos" role="tab">Combos Cyber</button>
+      <button class="tab flex-1 rounded-full px-3 py-3 text-sm font-semibold text-[var(--mut)]" data-tab="singles" role="tab">Cuentas individuales</button>
+    </div>
+  </div>
+
+  <div class="grid lg:grid-cols-[1fr_360px] gap-6 items-start mt-4">
+    <section class="min-w-0">
+      <div id="p-combos">
+        <div class="flex gap-2 overflow-x-auto pb-3" id="filters" style="scrollbar-width:none"></div>
+        <div id="combos-grid" class="grid sm:grid-cols-2 gap-4"></div>
+      </div>
+      <div id="p-singles" class="hidden">
+        <p class="text-sm text-[var(--mut)] mb-4">Elegí las que quieras: 1 cuenta 10% OFF, 2 cuentas 20% OFF, 3 o más 30% OFF. El descuento se aplica solo.</p>
+        <div id="singles-grid" class="grid gap-4"></div>
+      </div>
+    </section>
+
+    <aside id="resumen" class="lg:sticky lg:top-16 scroll-mt-16">
+      <div class="card rounded-2xl p-5" style="border-color:var(--violet);box-shadow:0 0 22px rgba(167,139,250,.25)">
+        <h2 class="text-xl font-bold mb-3">Resumen de tu pedido</h2>
+        <div id="upsell" class="hidden mb-4 rounded-xl p-3 text-sm pill"></div>
+        <ul id="lines" class="space-y-2 text-sm mb-4"></ul>
+        <div class="border-t border-[var(--line)] pt-3 space-y-1.5 text-sm">
+          <div class="flex justify-between text-[var(--mut)]"><span>Subtotal regular</span><span id="t-reg" class="line-through">$0</span></div>
+          <div id="t-extra-row" class="hidden flex justify-between neon-c"><span>Extra multicombo 5%</span><span id="t-extra"></span></div>
+          <div class="flex justify-between font-semibold text-emerald-400" style="text-shadow:0 0 10px rgba(52,211,153,.5)"><span>Ahorrás</span><span id="t-save">$0</span></div>
+          <div class="flex justify-between items-end pt-2"><span class="text-[var(--mut)]">Total a pagar</span><span id="t-total" class="disp text-3xl font-bold">$0</span></div>
+        </div>
+        <button id="wa" class="btn w-full mt-5 rounded-xl py-3.5 text-base disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none" disabled>Completar pedido por WhatsApp</button>
+        <p class="text-xs text-[var(--mut)] mt-3 text-center">Te respondemos al instante con los medios de pago.</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="text-center text-xs text-[var(--mut)] pb-6 px-4">© MISAKROOS. Precios en pesos argentinos (ARS). Destacados actualizados el 2/11/2026. Las marcas pertenecen a sus respectivos dueños.</footer>
+
+<div class="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-[#0b0f19] border-t border-[var(--line)] px-4 pt-3" style="padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))">
+  <div class="flex items-center gap-3">
+    <div class="flex-1 min-w-0">
+      <div class="text-xs text-[var(--mut)] truncate" id="bar-count">Sin productos</div>
+      <div class="disp font-bold text-xl" id="bar-total">$0</div>
+    </div>
+    <a href="#resumen" class="btn rounded-xl px-6 inline-flex items-center text-sm">Ver pedido</a>
+  </div>
+</div>
+
+<script>
+var WA = '5492645182955';
+function fmt(n){ return '$' + Math.round(n).toLocaleString('es-AR'); }
+function norm(s){
+  var out = '', t = String(s).normalize('NFD');
+  for (var i = 0; i !== t.length; i++) { var c = t.charCodeAt(i); if (c > 879 || 768 > c) out += t.charAt(i); }
+  return out.toLowerCase();
+}
+
+/* ---------- LOGOS ONLINE (Simple Icons, favicon vía Google, insignia) ---------- */
+var BRANDS = {
+  'Netflix':     {k:'netflix',   slug:'netflix',       domain:'netflix.com',       c:'E50914', i:'N',  al:''},
+  'Disney+':     {k:'disney',    slug:'disneyplus',    domain:'disneyplus.com',    c:'4F7CFF', i:'D+', al:'disney plus'},
+  'Prime Video': {k:'prime',     slug:'primevideo',    domain:'primevideo.com',    c:'00A8E1', i:'P',  al:'amazon'},
+  'Paramount+':  {k:'paramount', slug:'paramountplus', domain:'paramountplus.com', c:'2F7BFF', i:'P+', al:'paramount plus'},
+  'HBO Max':     {k:'hbo',       slug:'hbomax',        domain:'max.com',           c:'A855F7', i:'H',  al:'max'},
+  'Universal+':  {k:'universal', slug:null,            domain:'universalplus.com', c:'F5C518', i:'U+', al:'universal plus'}
+};
+function sources(n){
+  var b = BRANDS[n], s = [];
+  if (b.slug) s.push('https://cdn.simpleicons.org/' + b.slug + '/' + b.c);
+  s.push('https://www.google.com/s2/favicons?domain=' + b.domain + '&sz=128');
+  return s;
+}
+function fallback(n){ return '<span class="fbm" style="--c:#' + BRANDS[n].c + '">' + BRANDS[n].i + '</span>'; }
+function img(n){ return '<img class="ic" src="' + sources(n)[0] + '" alt="" loading="lazy" referrerpolicy="no-referrer" data-n="' + n + '" data-s="0">'; }
+function logo(n, size){
+  size = size || 'm';
+  return '<span class="chip ' + size + '" style="--c:#' + BRANDS[n].c + '" title="' + n + '">' + img(n) + '<span>' + n + '</span></span>';
+}
+function ico(n){ return '<span class="ico" title="' + n + '" style="border-color:#' + BRANDS[n].c + '55">' + img(n) + '</span>'; }
+document.addEventListener('error', function(e){
+  var t = e.target; if (!t || t.tagName !== 'IMG' || !t.dataset.n) return;
+  var next = sources(t.dataset.n)[+t.dataset.s + 1];
+  if (next) { t.dataset.s = +t.dataset.s + 1; t.src = next; } else t.outerHTML = fallback(t.dataset.n);
+}, true);
+
+/* ---------- INFO DE PLATAFORMAS (editable) · Destacados al 2/11/2026 ---------- */
+var INFO = {
+  'Netflix': {one:'Series, películas y documentales originales con estrenos cada semana.',
+    more:'Incluye series y películas originales, documentales, contenido infantil y juegos. Podés verlo en celular, tele, tablet y compu, con perfiles para cada persona.',
+    hot:{t:'Palomas negras – Temporada 2', d:'Vuelve el thriller de espías con Keira Knightley. Estreno el 5 de noviembre.'}},
+  'Disney+': {one:'Disney, Pixar, Marvel, Star Wars y National Geographic en un solo lugar.',
+    more:'Todo el universo Disney para toda la familia: clásicos animados, estrenos Pixar, películas y series de Marvel y Star Wars, y documentales de National Geographic.',
+    hot:{t:'VisionQuest (Marvel)', d:'La serie de Visión se acerca a su final: episodio final el 10 de noviembre. Además llega La emperatriz divorciada el 4 de noviembre.'}},
+  'Prime Video': {one:'Series y películas originales de Amazon, más cine de estreno y clásicos.',
+    more:'Producciones originales de Prime, películas, series y títulos para alquilar o ver incluidos. Ideal para mirar en cualquier dispositivo.',
+    hot:{t:'Los anillos de poder – Temporada 3', d:'Vuelve la serie más ambiciosa de la plataforma durante noviembre.'}},
+  'Paramount+': {one:'Series, cine de Paramount, Nickelodeon y deportes en vivo.',
+    more:'Series originales, películas de estudio, contenido infantil de Nickelodeon y transmisiones deportivas en vivo como fútbol, tenis y combate.',
+    hot:{t:'Yellowjackets – Temporada 4 (final)', d:'Regresa el 20 de noviembre con su última temporada. El 21 se juega la final de la Sudamericana.'}},
+  'HBO Max': {one:'Series premium de HBO, cine de Warner y DC y contenido original.',
+    more:'Las series más premiadas de HBO, películas de Warner Bros. y DC, documentales y estrenos originales de la plataforma.',
+    hot:{t:'La edad dorada – Temporada 4', d:'Llega la nueva temporada del drama de época, uno de los grandes estrenos de noviembre.'}},
+  'Universal+': {one:'Series policiales, dramas médicos y lo mejor de Universal y NBC.',
+    more:'Series policiales y médicas, comedias y documentales, con estrenos exclusivos y programas de NBC como Saturday Night Live.',
+    hot:{t:'One Chicago – Nuevas temporadas', d:'Desde el 2 de noviembre se estrenan nuevas temporadas de la franquicia. También llega la temporada 52 de SNL.'}}
+};
+
+/* ---------- DATOS ---------- */
+var P = {'Netflix':8500,'Disney+':7500,'Prime Video':5000,'Paramount+':5000,'HBO Max':5000,'Universal+':5000};
+var combos = [
+  {id:'d1', name:'Dúo Cine & Series', items:['Prime Video','HBO Max'], reg:10000, price:7500},
+  {id:'d2', name:'Dúo Premium', items:['Netflix','Disney+'], reg:16000, price:12800},
+  {id:'d3', name:'Dúo Maratón', items:['Netflix','HBO Max'], reg:13500, price:10800},
+  {id:'d4', name:'Dúo Familiar', items:['Disney+','Paramount+'], reg:12500, price:10000},
+  {id:'t1', name:'Trío Maratón', items:['Prime Video','Paramount+','HBO Max'], reg:15000, price:10500},
+  {id:'t2', name:'Trío Estrenos', items:['Netflix','Prime Video','HBO Max'], reg:18500, price:13000},
+  {id:'t3', name:'Trío Familiar', items:['Netflix','Disney+','Paramount+'], reg:21000, price:14700},
+  {id:'c1', name:'Cuarteto Top', items:['Netflix','Disney+','Prime Video','HBO Max'], reg:26000, price:18200},
+  {id:'c2', name:'Cuarteto Económico', items:['Prime Video','Paramount+','HBO Max','Universal+'], reg:20000, price:14000},
+  {id:'c3', name:'Cuarteto Series', items:['Netflix','Prime Video','Paramount+','HBO Max'], reg:23500, price:16500},
+  {id:'q1', name:'Quinteto Sin Netflix', items:['Disney+','Prime Video','Paramount+','HBO Max','Universal+'], reg:27500, price:19250},
+  {id:'q2', name:'Quinteto Sin Disney+', items:['Netflix','Prime Video','Paramount+','HBO Max','Universal+'], reg:28500, price:19950},
+  {id:'q3', name:'Quinteto Sin Universal+', items:['Netflix','Disney+','Prime Video','Paramount+','HBO Max'], reg:31000, price:21700},
+  {id:'pase', name:'Pase Total Streaming (6 plataformas)', items:['Netflix','Disney+','Prime Video','Paramount+','HBO Max','Universal+'], reg:36000, price:25200, star:true}
+];
+var singles = Object.keys(P).map(function(n){ return {id:BRANDS[n].k, name:n, price:P[n]}; });
+
+var selC = new Set(), selS = new Set(), expanded = new Set(), filterSize = 'all', query = '';
+function pctFor(n){ return n === 0 ? 0 : n === 1 ? 0.10 : n === 2 ? 0.20 : 0.30; }
+
+function calc(){
+  var cs = combos.filter(function(c){ return selC.has(c.id); });
+  var ss = singles.filter(function(s){ return selS.has(s.id); });
+  var pct = pctFor(ss.length);
+  var comboReg = cs.reduce(function(a,c){ return a + c.reg; }, 0);
+  var comboNow = cs.reduce(function(a,c){ return a + c.price; }, 0);
+  var sReg = ss.reduce(function(a,s){ return a + s.price; }, 0);
+  var sNow = sReg * (1 - pct);
+  var regular = comboReg + sReg, sub = comboNow + sNow;
+  var extra = cs.length > 1 ? Math.round(sub * 0.05) : 0;
+  var total = sub - extra;
+  return {cs:cs, ss:ss, pct:pct, sReg:sReg, sNow:sNow, regular:regular, sub:sub, extra:extra, total:total, saved:regular - total};
+}
+function $(id){ return document.getElementById(id); }
+
+/* ---------- ARMÁ TU COMBO ---------- */
+function renderBuilder(){
+  var r = calc(), q = norm(query.trim());
+  var list = singles.filter(function(s){ return !q || norm(s.name).indexOf(q) !== -1 || norm(BRANDS[s.name].al).indexOf(q) !== -1; });
+  $('bld-chips').innerHTML = list.length ? list.map(function(s){
+    var on = selS.has(s.id);
+    return '<button data-b="' + s.id + '" aria-pressed="' + on + '" class="bchip ' + (on ? 'on' : '') + '">' + img(s.name) +
+      '<span class="flex-1 min-w-0"><span class="block text-sm font-semibold truncate">' + s.name + '</span><span class="block text-xs text-[var(--mut)]">' + fmt(s.price) + '</span></span>' +
+      '<span class="' + (on ? 'neon-c' : 'text-[var(--mut)]') + ' text-lg">' + (on ? '✓' : '+') + '</span></button>';
+  }).join('') : '<p class="col-span-full text-sm text-[var(--mut)]">No encontramos esa plataforma. Probá con otro nombre.</p>';
+
+  var el = $('bld-res');
+  if (!r.ss.length) { el.innerHTML = '<p class="text-sm text-[var(--mut)] text-center">Elegí al menos una plataforma para ver tu precio.</p>'; return; }
+  var sel = r.ss.map(function(s){ return s.name; });
+  var m = combos.filter(function(c){ return c.items.length === sel.length && sel.every(function(x){ return c.items.indexOf(x) !== -1; }); })[0];
+  var better = m && r.sNow > m.price;
+  el.innerHTML =
+    '<div class="rounded-xl p-4" style="background:#0b1020;border:1px solid var(--line)">' +
+      '<div class="flex flex-wrap gap-1.5 mb-3">' + r.ss.map(function(s){ return logo(s.name,'s'); }).join('') + '</div>' +
+      '<div class="space-y-1.5 text-sm">' +
+        '<div class="flex justify-between text-[var(--mut)]"><span>Total sin descuento</span><span class="line-through">' + fmt(r.sReg) + '</span></div>' +
+        '<div class="flex justify-between text-emerald-400 font-semibold"><span>Descuento ' + Math.round(r.pct*100) + '% OFF</span><span>-' + fmt(r.sReg - r.sNow) + '</span></div>' +
+        '<div class="flex justify-between items-end pt-2 border-t border-[var(--line)]"><span class="font-semibold">Total con descuento</span><span class="disp text-3xl font-bold neon-c">' + fmt(r.sNow) + '</span></div>' +
+      '</div>' +
+      (better ? '<div class="mt-3 rounded-lg p-3 text-sm pill">Hay un combo para esto: <b>' + m.name + '</b> por ' + fmt(m.price) + '. <button data-swap="' + m.id + '" class="btn rounded-lg px-3 mt-2 text-xs block" style="min-height:38px">Usar este combo</button></div>' : '') +
+      '<button data-sendwa="1" class="btn w-full rounded-xl mt-4 text-sm">Pedir esto por WhatsApp</button>' +
+      '<button data-clear="1" class="w-full mt-2 text-xs text-[var(--mut)] min-h-[40px]">Limpiar selección</button>' +
+    '</div>';
+}
+$('q').addEventListener('input', function(e){ query = e.target.value; try { renderBuilder(); } catch (err) { showErr(err); } });
+
+function showErr(err){
+  var b = $('errbox');
+  if (!b) { b = document.createElement('div'); b.id = 'errbox'; b.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99;background:#7f1d1d;color:#fff;font:12px monospace;padding:6px 10px'; document.body.appendChild(b); }
+  b.textContent = 'Error: ' + (err && err.message ? err.message : err);
+}
+
+function renderCombos(){
+  $('filters').innerHTML = ['all',2,3,4,5,6].map(function(s){
+    return '<button data-f="' + s + '" class="fil card rounded-full px-4 py-2.5 text-sm font-semibold whitespace-nowrap ' + (filterSize == s ? 'on' : 'text-[var(--mut)]') + '">' + (s === 'all' ? 'Todos' : s + ' servicios') + '</button>';
+  }).join('');
+  $('combos-grid').innerHTML = combos.filter(function(c){ return filterSize === 'all' || c.items.length == filterSize; }).map(function(c){
+    var on = selC.has(c.id), off = Math.round((c.reg - c.price) / c.reg * 100);
+    return '<article class="card rounded-2xl p-4 flex flex-col ' + (on ? 'sel' : '') + ' ' + (c.star ? 'sm:col-span-2' : '') + '">' +
+      '<div class="flex items-start justify-between gap-2"><div><h3 class="text-lg font-bold leading-snug">' + c.name + '</h3><p class="text-xs text-[var(--mut)] mt-0.5">' + c.items.length + ' servicios · ' + off + '% OFF</p></div>' +
+      '<span class="pill shrink-0 rounded-full text-xs font-semibold px-2.5 py-1">Ahorrás ' + fmt(c.reg - c.price) + '</span></div>' +
+      '<div class="flex flex-wrap gap-2 mt-3">' + c.items.map(function(i){ return logo(i,'m'); }).join('') + '</div>' +
+      '<div class="mt-4 flex items-end gap-3"><span class="disp text-3xl font-bold neon-c">' + fmt(c.price) + '</span><span class="text-sm text-[var(--mut)] line-through pb-1">' + fmt(c.reg) + '</span></div>' +
+      '<button data-c="' + c.id + '" class="' + (on ? 'btn-off' : 'btn') + ' mt-4 rounded-xl text-sm font-semibold">' + (on ? 'Quitar del pedido' : 'Agregar al pedido') + '</button></article>';
+  }).join('');
+}
+
+function renderSingles(){
+  var r = calc();
+  var keep = Array.prototype.map.call(document.querySelectorAll('.mini-row'), function(e){ return e.scrollLeft; });
+  var tier = r.ss.length ? Math.round(r.pct * 100) : 10;
+  $('singles-grid').innerHTML = singles.map(function(s){
+    var on = selS.has(s.id), op = expanded.has(s.id), i = INFO[s.name];
+    var cb = combos.filter(function(c){ return c.items.indexOf(s.name) !== -1; });
+    return '<article id="svc-' + s.id + '" class="svc card rounded-2xl p-4 ' + (on ? 'sel' : '') + '">' +
+      '<div class="flex items-center justify-between gap-2">' + logo(s.name,'l') + '<span class="pill rounded-full text-xs px-2.5 py-1 font-semibold">' + tier + '% OFF</span></div>' +
+      '<p class="mt-3 text-[15px] leading-snug">' + i.one + '</p>' +
+      '<button data-more="' + s.id + '" aria-expanded="' + op + '" class="mt-1 flex items-center gap-1.5 text-sm neon-c min-h-[44px]"><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>Más info y lo destacado ahora</button>' +
+      '<div id="more-' + s.id + '" class="' + (op ? '' : 'hidden') + ' mb-3 rounded-xl border border-[var(--line)] bg-[#0b1020] p-3 text-sm"><p class="text-[var(--mut)]">' + i.more + '</p>' +
+        '<div class="mt-3 rounded-lg p-3" style="border:1px solid var(--pink);box-shadow:0 0 14px rgba(255,79,216,.3)"><p class="text-xs font-semibold" style="color:var(--pink);text-shadow:0 0 10px rgba(255,79,216,.7)">🔥 Lo más destacado ahora</p><p class="font-semibold mt-1">' + i.hot.t + '</p><p class="text-[var(--mut)] mt-0.5">' + i.hot.d + '</p></div></div>' +
+      '<div class="flex items-end gap-3"><span class="disp text-2xl font-bold">' + fmt(s.price * (1 - (r.ss.length ? r.pct : 0.10))) + '</span><span class="text-sm text-[var(--mut)] line-through pb-0.5">' + fmt(s.price) + '</span></div>' +
+      '<button data-s="' + s.id + '" class="' + (on ? 'btn-off' : 'btn') + ' mt-3 w-full rounded-xl text-sm font-semibold">' + (on ? 'Quitar del pedido' : 'Agregar ' + s.name) + '</button>' +
+      '<p class="mt-4 mb-1 text-sm font-semibold">Combos con <span class="neon-v">' + s.name + '</span> <span class="text-[var(--mut)] font-normal">· deslizá y tocá para sumar</span></p>' +
+      '<div class="mini-row">' + cb.map(function(c){
+        var o = selC.has(c.id);
+        return '<button data-c="' + c.id + '" class="mini card rounded-xl p-3 ' + (o ? 'sel' : '') + '"><span class="block text-sm font-semibold leading-tight">' + c.name + '</span>' +
+          '<span class="flex flex-wrap gap-1 mt-2">' + c.items.map(ico).join('') + '</span>' +
+          '<span class="flex items-end justify-between mt-2"><span class="disp font-bold neon-c">' + fmt(c.price) + '</span><span class="text-xs ' + (o ? 'neon-c' : 'text-[var(--mut)]') + '">' + (o ? '✓ Sumado' : '+ Sumar') + '</span></span></button>';
+      }).join('') + '</div></article>';
+  }).join('');
+  Array.prototype.forEach.call(document.querySelectorAll('.mini-row'), function(e, i){ e.scrollLeft = keep[i] || 0; });
+}
+
+function renderSummary(){
+  var r = calc(), lines = [];
+  r.cs.forEach(function(c){ lines.push('<li class="flex justify-between gap-2 items-center"><span>' + c.name + '</span><span class="flex items-center gap-1 shrink-0">' + fmt(c.price) + '<button data-rc="' + c.id + '" class="w-9 h-9 text-[var(--mut)] hover:text-red-400" aria-label="Quitar ' + c.name + '">✕</button></span></li>'); });
+  if (r.ss.length) lines.push('<li><div class="flex justify-between text-[var(--mut)]"><span>Cuentas (' + Math.round(r.pct*100) + '% OFF)</span><span>' + fmt(r.sNow) + '</span></div>' +
+    r.ss.map(function(s){ return '<div class="flex justify-between items-center pl-3 mt-1">' + logo(s.name,'s') + '<button data-rs="' + s.id + '" class="w-9 h-9 text-[var(--mut)] hover:text-red-400" aria-label="Quitar ' + s.name + '">✕</button></div>'; }).join('') + '</li>');
+  $('lines').innerHTML = lines.length ? lines.join('') : '<li class="text-[var(--mut)]">Todavía no elegiste nada. Sumá un combo o armá el tuyo arriba.</li>';
+  $('t-reg').textContent = fmt(r.regular);
+  $('t-save').textContent = fmt(r.saved);
+  $('t-total').textContent = fmt(r.total);
+  $('t-extra-row').classList.toggle('hidden', !r.extra);
+  $('t-extra').textContent = '-' + fmt(r.extra);
+  var n = r.cs.length + r.ss.length;
+  $('bar-count').textContent = n ? n + (n === 1 ? ' producto' : ' productos') + ' · ahorrás ' + fmt(r.saved) : 'Sin productos';
+  $('bar-total').textContent = fmt(r.total);
+  $('wa').disabled = !n;
+  var up = $('upsell');
+  var showUp = !selC.has('pase') && n > 0 && (r.cs.length >= 2 || r.sub > 20000);
+  up.classList.toggle('hidden', !showUp);
+  if (showUp) up.innerHTML = '<p class="font-semibold">¡Llevate el Pase Total de 6 plataformas por solo $25.200 y ahorrá más de $10.000!</p><button id="go-pase" class="btn rounded-lg px-3 py-2 mt-2 text-xs">Cambiar al Pase Total</button>';
+}
+
+function render(){
+  [renderCombos, renderSingles, renderSummary, renderBuilder].forEach(function(fn){ try { fn(); } catch (err) { showErr(err); } });
+}
+function toggle(set, id){ if (set.has(id)) set.delete(id); else set.add(id); render(); }
+function showTab(name){
+  Array.prototype.forEach.call(document.querySelectorAll('.tab'), function(b){ var on = b.dataset.tab === name; b.classList.toggle('on', on); b.classList.toggle('text-[var(--mut)]', !on); });
+  $('p-combos').classList.toggle('hidden', name !== 'combos');
+  $('p-singles').classList.toggle('hidden', name !== 'singles');
+}
+function sendWA(){
+  var r = calc(); if (!r.cs.length && !r.ss.length) return;
+  var items = [];
+  r.cs.forEach(function(c){ items.push('- ' + c.name + ': ' + c.items.join(' + ')); });
+  if (r.ss.length) items.push('- Cuentas individuales (' + Math.round(r.pct*100) + '% OFF): ' + r.ss.map(function(s){ return s.name; }).join(', '));
+  var msg = '¡Hola Misakroos! Quiero aprovechar la promo de Cyber Monday:\n\n📦 Mi pedido:\n' + items.join('\n') + '\n';
+  if (r.extra) msg += '🎁 Incluye 5% extra por multicombo\n';
+  msg += '\n💰 Total a pagar: ' + fmt(r.total) + '\n🎉 Me ahorré: ' + fmt(r.saved) + '\n\n¿Cuáles son los medios de pago disponibles para activar ya mismo?';
+  window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+}
+
+document.addEventListener('click', function(e){
+  var t = e.target.closest ? e.target.closest('button') : null; if (!t) return;
+  var d = t.dataset;
+  if (d.c) toggle(selC, d.c);
+  else if (d.s) toggle(selS, d.s);
+  else if (d.b) toggle(selS, d.b);
+  else if (d.f) { filterSize = d.f; render(); }
+  else if (d.rc) { selC.delete(d.rc); render(); }
+  else if (d.rs) { selS.delete(d.rs); render(); }
+  else if (d.swap) { selS = new Set(); selC.add(d.swap); render(); }
+  else if (d.clear) { selS = new Set(); render(); }
+  else if (d.sendwa || t.id === 'wa') sendWA();
+  else if (t.id === 'go-pase') { selC = new Set(['pase']); selS = new Set(); render(); }
+  else if (d.tab) showTab(d.tab);
+  else if (d.more) {
+    if (expanded.has(d.more)) expanded.delete(d.more); else expanded.add(d.more);
+    t.setAttribute('aria-expanded', expanded.has(d.more));
+    $('more-' + d.more).classList.toggle('hidden', !expanded.has(d.more));
+  }
+  else if (d.go) {
+    showTab('singles');
+    setTimeout(function(){
+      var el = $('svc-' + d.go); if (!el) return;
+      el.scrollIntoView({behavior:'smooth', block:'start'});
+      el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse');
+    }, 60);
+  }
+});
+
+try {
+  $('logo-strip').innerHTML = Object.keys(BRANDS).map(function(n){ return '<button class="logo-go" data-go="' + BRANDS[n].k + '" aria-label="Ir a ' + n + '">' + logo(n,'l') + '</button>'; }).join('');
+} catch (err) { showErr(err); }
+render();
+</script>
+</body>
+</html>
